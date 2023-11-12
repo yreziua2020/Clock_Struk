@@ -3,9 +3,28 @@
 #include <ESP8266WebServer.h>
 #include <WiFiUdp.h>
 
-#include "Timer.h"
+#include <ESP8266HTTPClient.h>
+#include <WiFiClientSecure.h>
 
+#include "Timer.h"
 Timer _timer;
+
+WiFiClient client;
+uint16_t UserID = 0;  //1  -сергей 2- юоий 3- мама
+///-----------------------------------------------------------------------------------------------
+///-----------------------------------------------------------------------------------------------
+const char* DB_host = "dev.ibc-composite.com";  //host_name
+const int Port = 80;
+const char* database_pass = "Kvw1scUvg97Y";  //пароль пользователя базы данных
+uint16_t f_eror_sql;                         //флаг ошибки sql
+
+String postData = ""; //--> Variables sent for HTTP POST request data.
+String payload = "";  //--> Variable for receiving response from HTTP POST.
+int  vlaga_perem; //чтения значение флаги из базы
+float temp_sql;
+float volt_bat;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///-----------------------------------------------------------------------------------------------
 
 #include "global.h"
 #include "NTP_str.h"

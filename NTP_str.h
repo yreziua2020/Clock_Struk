@@ -103,13 +103,13 @@ strDateTime ConvertUnixTimeStamp( unsigned long _tempTimeStamp) {
   _DateTime_temp.month = month + 1;  // jan is month 1
   _DateTime_temp.year += 1970;
   _DateTime_temp.day = time + 1;     // day of month
-Serial.print("_DateTime_temp.year="); Serial.println(_DateTime_temp.year);
+//Serial.print("_DateTime_temp.year="); Serial.println(_DateTime_temp.year);
   return _DateTime_temp ;
 }
 //*************************************************************************************************************************************************************************************************
-//******************************************Конвертируем данные полученые из интернета в другой функции********а также выясняем надо ли переходить на летнее время *******************************
+//**************************************************а также выясняем надо ли переходить на летнее время *******************************
 boolean summerTime(unsigned long _timeStamp ) {
-  strDateTime  _DateTimetemp = ConvertUnixTimeStamp(_timeStamp);
+  strDateTime  _DateTimetemp = ConvertUnixTimeStamp(_timeStamp);  //Конвертируем данные полученые из интернета в другой функции и уже с ними работаем
    //printTime("Innerhalb ", _tempDateTime);
 
   if (_DateTimetemp.month < 3 || _DateTimetemp.month > 10) return false; // keine Sommerzeit in Jan, Feb, Nov, Dez
@@ -124,11 +124,12 @@ boolean summerTime(unsigned long _timeStamp ) {
 unsigned long adjustTimeZone(unsigned long _timeStamp, int _timeZone, bool _isDayLightSavingSaving) {   //думаю определяет пеереходить ли на етнее времяbool _isDayLightSavingSaving
   //strDateTime _tempDateTime;
   Serial.print("_timeStamp="); Serial.println(_timeStamp);
-  _timeStamp += (_timeZone *  360); // adjust timezone
+  _timeStamp += (_timeZone *  3600); // adjust timezone
   Serial.print("_timeStamp2="); Serial.println(_timeStamp);
   // printTime("Innerhalb adjustTimeZone ", ConvertUnixTimeStamp(_timeStamp));
- // if (_isDayLightSavingSaving && summerTime(_timeStamp)) _timeStamp += 3600; //  летнее время Sommerzeit beachten
-    Serial.print("_timeStamp3="); Serial.println(_timeStamp);
+   if (_isDayLightSavingSaving && summerTime(_timeStamp)) _timeStamp += 3600; //  летнее время Sommerzeit beachten
+
+  //  Serial.print("_timeStamp3="); Serial.println(_timeStamp);
   return _timeStamp;
 }
 //*************************************************************************************************************************************************************************************************
