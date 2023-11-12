@@ -80,7 +80,7 @@ strDateTime ConvertUnixTimeStamp( unsigned long _tempTimeStamp) {
   year = 0;  days = 0;
   
   while ((unsigned)(days += (LEAP_YEAR(year) ? 366 : 365)) <= time) {    year++;  } //считаем год
-  _DateTime_temp.year = year; // year is offset from 1970
+  _DateTime_temp.year = year; // year is offset from 1970//53
   
   //------------------------------считаем наверное число-----------
   days -= LEAP_YEAR(year) ? 366 : 365;
@@ -90,7 +90,7 @@ strDateTime ConvertUnixTimeStamp( unsigned long _tempTimeStamp) {
   //-------------------------------считаем месяц----------
     for (month = 0; month < 12; month++) {
     if (month == 1) { // february
-      if (LEAP_YEAR(year)) { monthLength = 29;
+          if (LEAP_YEAR(year)) { monthLength = 29;
       } else {               monthLength = 28;    }
     } 
     else 
@@ -103,7 +103,7 @@ strDateTime ConvertUnixTimeStamp( unsigned long _tempTimeStamp) {
   _DateTime_temp.month = month + 1;  // jan is month 1
   _DateTime_temp.year += 1970;
   _DateTime_temp.day = time + 1;     // day of month
-
+Serial.print("_DateTime_temp.year="); Serial.println(_DateTime_temp.year);
   return _DateTime_temp ;
 }
 //*************************************************************************************************************************************************************************************************
@@ -123,28 +123,38 @@ boolean summerTime(unsigned long _timeStamp ) {
 //*************************************************************************************************************************************************************************************************
 unsigned long adjustTimeZone(unsigned long _timeStamp, int _timeZone, bool _isDayLightSavingSaving) {   //думаю определяет пеереходить ли на етнее времяbool _isDayLightSavingSaving
   //strDateTime _tempDateTime;
-  _timeStamp += _timeZone *  360; // adjust timezone
+  Serial.print("_timeStamp="); Serial.println(_timeStamp);
+  _timeStamp += (_timeZone *  360); // adjust timezone
+  Serial.print("_timeStamp2="); Serial.println(_timeStamp);
   // printTime("Innerhalb adjustTimeZone ", ConvertUnixTimeStamp(_timeStamp));
-  if (_isDayLightSavingSaving && summerTime(_timeStamp)) _timeStamp += 3600; //  летнее время Sommerzeit beachten
+ // if (_isDayLightSavingSaving && summerTime(_timeStamp)) _timeStamp += 3600; //  летнее время Sommerzeit beachten
+    Serial.print("_timeStamp3="); Serial.println(_timeStamp);
   return _timeStamp;
 }
 //*************************************************************************************************************************************************************************************************
 void ISRsecondTick()
 {
-  //strDateTime _tempDateTime;
-  //AdminTimeOutCounter++;
-  //cNTP_Update++;
+
   UnixTimestamp++;
-  absoluteActualTime = adjustTimeZone(UnixTimestamp, timeZone   , 0); //коректируем время на основании значения на основании тайм зоны и надо  ли  переключать время на летние  //1 то не коректирует впремя по  тайм зоны 
+
+  absoluteActualTime  = UnixTimestamp +timeZone *  3600; 
   DateTime = ConvertUnixTimeStamp(absoluteActualTime);  //  convert to DateTime format
-
-  //Serial.println("секуда прошла"); 
-
-  //actualTime = 3600 * DateTime.hour + 60 * DateTime.minute + DateTime.second;
-Serial.print(DateTime.hour);Serial.print(":"); Serial.print(DateTime.minute);Serial.print(":");Serial.print(DateTime.second);Serial.print("  "); Serial.println(DateTime.year);
+  Serial.print(DateTime.hour);Serial.print(":"); Serial.print(DateTime.minute);Serial.print(":");Serial.print(DateTime.second);
+  Serial.print(" "); Serial.print(DateTime.day);Serial.print("/"); Serial.print(DateTime.month);Serial.print("  "); Serial.println(DateTime.year);
   
 }
 //*************************************************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
 //*************************************************************************************************************************************************************************************************
 void ISRsecondTick2()
 {

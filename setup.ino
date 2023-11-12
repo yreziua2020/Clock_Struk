@@ -2,6 +2,7 @@ void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, password);   WiFi.config(ip, gateway, subnet, primaryDNS, secondaryDNS);
   Serial.println("");
+  Serial.println("start");
   while (WiFi.status() != WL_CONNECTED) { delay(300);Serial.print("."); if(raz_podk++>250){ESP.reset(); }}  
   delay(100);  
   
