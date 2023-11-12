@@ -43,8 +43,8 @@ void test_t(){
   h = String (DateTime.hour/10) + String (DateTime.hour%10);
   m = String (DateTime.minute/10) + String (DateTime.minute%10);
   y = String (DateTime.year);
-     Serial.print(h);Serial.print(":"); Serial.print(m);Serial.print("  "); Serial.println(y);
-     Serial.print(DateTime.hour);Serial.print(":"); Serial.print(DateTime.minute);Serial.print("  "); Serial.println(DateTime.year);
+     //Serial.print(h);Serial.print(":"); Serial.print(m);Serial.print("  "); Serial.println(y);
+    // Serial.print(DateTime.hour);Serial.print(":"); Serial.print(DateTime.minute);Serial.print(":");Serial.print(DateTime.second);Serial.print("  "); Serial.println(DateTime.year);
 }
 
 

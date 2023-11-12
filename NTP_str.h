@@ -129,8 +129,6 @@ unsigned long adjustTimeZone(unsigned long _timeStamp, int _timeZone, bool _isDa
   return _timeStamp;
 }
 //*************************************************************************************************************************************************************************************************
-//*************************************************************************************************************************************************************************************************
-
 void ISRsecondTick()
 {
   //strDateTime _tempDateTime;
@@ -143,7 +141,24 @@ void ISRsecondTick()
   //Serial.println("секуда прошла"); 
 
   //actualTime = 3600 * DateTime.hour + 60 * DateTime.minute + DateTime.second;
+Serial.print(DateTime.hour);Serial.print(":"); Serial.print(DateTime.minute);Serial.print(":");Serial.print(DateTime.second);Serial.print("  "); Serial.println(DateTime.year);
+  
+}
+//*************************************************************************************************************************************************************************************************
+//*************************************************************************************************************************************************************************************************
+void ISRsecondTick2()
+{
+  //strDateTime _tempDateTime;
+  //AdminTimeOutCounter++;
+  //cNTP_Update++;
+  UnixTimestamp++;
+  absoluteActualTime = adjustTimeZone(UnixTimestamp, timeZone   , 0); //коректируем время на основании значения на основании тайм зоны и надо  ли  переключать время на летние  //1 то не коректирует впремя по  тайм зоны 
+  DateTime = ConvertUnixTimeStamp(absoluteActualTime);  //  convert to DateTime format
 
+  //Serial.println("секуда прошла"); 
+
+  //actualTime = 3600 * DateTime.hour + 60 * DateTime.minute + DateTime.second;
+   
   
 }
 //*************************************************************************************************************************************************************************************************
