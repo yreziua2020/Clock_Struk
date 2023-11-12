@@ -137,10 +137,10 @@ void ISRsecondTick()
   //AdminTimeOutCounter++;
   //cNTP_Update++;
   UnixTimestamp++;
-  absoluteActualTime = adjustTimeZone(UnixTimestamp, timeZone   , 1); //коректируем время на основании значения на основании тайм зоны и надо  ли  переключать время на летние
+  absoluteActualTime = adjustTimeZone(UnixTimestamp, timeZone   , 0); //коректируем время на основании значения на основании тайм зоны и надо  ли  переключать время на летние  //1 то не коректирует впремя по  тайм зоны 
   DateTime = ConvertUnixTimeStamp(absoluteActualTime);  //  convert to DateTime format
 
-  Serial.println("секуда прошла"); 
+  //Serial.println("секуда прошла"); 
 
   //actualTime = 3600 * DateTime.hour + 60 * DateTime.minute + DateTime.second;
 

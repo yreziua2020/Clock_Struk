@@ -12,7 +12,7 @@ volatile unsigned long UnixTimestamp = 0;	// GLOBALTIME  ( Will be set by NTP)
 //int cNTP_Update = 0;											// Counter for Updating the time via NTP
 //Ticker tkSecond;												  // Second - Timer for Updating Datetime Structure
 const char* ntpServerName = "ntp.time.in.ua";
-long timeZone =2;   
+long timeZone =3;   
 long absoluteActualTime;
 
 
