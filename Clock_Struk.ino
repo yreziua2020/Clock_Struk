@@ -10,18 +10,7 @@
 Timer _timer;
 
 WiFiClient client;
-///-----------------------------------------------------------------------------------------------
-///-----------------------------------------------------------------------------------------------
-const char* DB_host = "dev.ibc-composite.com";  //host_name
-const int Port = 80;
-const char* database_pass = "Kvw1scUvg97Y";  //пароль пользователя базы данных
-//uint16_t f_eror_sql;                         //флаг ошибки sql
 
-String postData = ""; //--> Variables sent for HTTP POST request data.
-String payload = "";  //--> Variable for receiving response from HTTP POST.
-int  vlaga_perem; //чтения значение флаги из базы
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///-----------------------------------------------------------------------------------------------
 
 #include "global.h"
 #include "NTP_str.h"
@@ -31,23 +20,7 @@ extern "C" {
 #include "user_interface.h"
 }
 
-String y;     // год
-String mon;   // месяц
-String wd;    // день недели
-String d;     // дени
-String h;     // часоы
-String m;     // минуты
-String s;     // секунды
-//---------------------------------------------------------------------------------------------------------------------------
-IPAddress ip(192, 168, 1, 99);
-IPAddress gateway(192, 168, 1, 199);
-IPAddress primaryDNS(192, 168, 1, 199);  // опционально
-IPAddress subnet(255, 255, 255, 0);
-IPAddress secondaryDNS(8, 8, 8, 8);  // опционально
-const char* ssid = "home";
-const char* password = "30011980";
-int raz_podk;  //сколько раз пробуем подключиться до прпезапуска
-//---------------------------------------------------------------------------------------------------------------------------
+
 void loop() {
 _timer.update();
 
