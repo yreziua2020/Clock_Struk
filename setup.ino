@@ -13,6 +13,6 @@ void setup() {
   if  (WiFi.status() == WL_CONNECTED) { getNTPtime();}
   // put your setup code here, to run once:
 //_timer.every(1000, ISRsecondTick);
-  bd_sql_read2();
+  //bd_sql_read2();
 
 }
